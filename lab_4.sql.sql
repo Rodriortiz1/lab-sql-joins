@@ -29,7 +29,7 @@ JOIN category AS c
 ON fc.category_id = c.category_id
 GROUP BY c.name;
 --5. Identify the film categories with the longest average running time.
-SELECT c.name, AVG(f.length) AS "Average of running time"
+SELECT c.name, ROUND(AVG(f.length)) AS "Average of running time"
 FROM film AS f 
 JOIN film_category AS fc
 ON f.film_id = fc.film_id
@@ -53,8 +53,7 @@ JOIN inventory AS i
 ON s.store_id = i.store_id
 JOIN film AS f
 ON i.film_id = f.film_id
-GROUP BY f.title, s.store_id
-HAVING f.title = "ACADEMY DINOSAUR" AND  s.store_id = 1;
+WHERE f.title = "ACADEMY DINOSAUR" AND  s.store_id = 1;
 --8. Provide a list of all distinct film titles, along with their availability status in the inventory. Include a column indicating whether each title is 'Available' or 'NOT available.' Note that there are 42 titles that are not in the inventory, and this information can be obtained using a CASE statement combined with IFNULL."
 SELECT 
     title,
